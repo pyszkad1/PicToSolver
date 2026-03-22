@@ -18,12 +18,13 @@ If you are developing or running the app locally using Expo Go:
 ## Downloading the App (Permanent APK)
 Because Expo Go development links expire as soon as you turn your computer off, the best way to share the app is via a standalone `.apk` build!
 
-You can download the compiled Android app directly here:
-> **📲 [Download PicToSolver APK](https://expo.dev/artifacts/eas/a14dfc47-e2d1-4899-9c97-f5c00723e0c3.apk)** 
+You can view the build details and download the compiled Android app directly here:
+> **🔗 [Expo Build Dashboard](https://expo.dev/accounts/apyszko/projects/PicToSolver/builds/a14dfc47-e2d1-4899-9c97-f5c00723e0c3)** 
+> **📲 [Direct APK Download](https://expo.dev/artifacts/eas/a14dfc47-e2d1-4899-9c97-f5c00723e0c3.apk)** 
 
 Alternatively, scan this permanent QR code with your Android phone to install the app:
 
-![Download QR Code](./qr_link.png)
+<img src="./qr_link.png" width="250" alt="Download QR Code" />
 
 ## Built With
 - **React Native** & **Expo**
