@@ -18,9 +18,12 @@ If you are developing or running the app locally using Expo Go:
 ## Downloading the App (Permanent APK)
 Because Expo Go development links expire as soon as you turn your computer off, the best way to share the app is via a standalone `.apk` build!
 
-*(Replace the section below with your permanent EAS Build download URL or QR image from Expo.dev once your cloud build finishes!)*
+You can download the compiled Android app directly here:
+> **📲 [Download PicToSolver APK](https://expo.dev/artifacts/eas/a14dfc47-e2d1-4899-9c97-f5c00723e0c3.apk)** 
 
-> **📲 [Download the Android APK Here](https://expo.dev/artifacts/eas/...)** 
+Alternatively, scan this permanent QR code with your Android phone to install the app:
+
+![Download QR Code](./qr_link.png)
 
 ## Built With
 - **React Native** & **Expo**
