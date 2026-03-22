@@ -1,27 +1,33 @@
 {
-    "expo": {
-        "name": "PicToSolver",
-        "slug": "PicToSolver",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./PicToSolver_icon.png",
-        "userInterfaceStyle": "light",
-        "splash": {
-            "image": "./PicToSolver_icon.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
-        },
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./PicToSolver_icon.png",
-                "backgroundColor": "#ffffff"
-            }
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        }
+  "expo": {
+    "name": "PicToSolver",
+    "slug": "PicToSolver",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./PicToSolver_icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./PicToSolver_icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./PicToSolver_icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.apyszko.PicToSolver"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "02739a9c-c907-48ec-9e5c-a0ab853c7e84"
+      }
     }
+  }
 }
