@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import HomeScreen from './src/screens/HomeScreen';
 import SolverScreen from './src/screens/SolverScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import CropScreen from './src/screens/CropScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,16 @@ export default function App() {
                     name="Settings"
                     component={SettingsScreen}
                     options={{ title: 'Settings' }}
+                />
+                <Stack.Screen
+                    name="Crop"
+                    component={CropScreen}
+                    options={{
+                        title: 'Crop Image',
+                        headerStyle: { backgroundColor: '#1C1C1E' },
+                        headerTintColor: '#FFFFFF',
+                        headerShadowVisible: false,
+                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

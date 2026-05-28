@@ -21,6 +21,17 @@
       },
       "package": "com.apyszko.PicToSolver"
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "colors": {
+            "cropToolbarColor": "#1C1C1E",
+            "cropBackgroundColor": "#000000"
+          }
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     },

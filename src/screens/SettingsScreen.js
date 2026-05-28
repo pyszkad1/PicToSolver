@@ -7,6 +7,7 @@ const API_KEY_STORAGE_KEY = 'GEMINI_API_KEY';
 export default function SettingsScreen({ navigation }) {
     const [apiKey, setApiKey] = useState('');
     const [savedKey, setSavedKey] = useState('');
+    const [secureTextEntry, setSecureTextEntry] = useState(true);
 
     useEffect(() => {
         loadKey();
@@ -16,7 +17,7 @@ export default function SettingsScreen({ navigation }) {
         try {
             const stored = await AsyncStorage.getItem(API_KEY_STORAGE_KEY);
             if (stored) {
-                setApiKey(stored);
+                // Keep input field empty by default, only populate the savedKey masked display
                 setSavedKey(stored);
             }
         } catch (e) {
@@ -33,6 +34,7 @@ export default function SettingsScreen({ navigation }) {
         try {
             await AsyncStorage.setItem(API_KEY_STORAGE_KEY, trimmed);
             setSavedKey(trimmed);
+            setApiKey(''); // Clear the input field after saving
             Alert.alert('Saved!', 'Your Gemini API key has been saved.', [
                 { text: 'OK', onPress: () => navigation.goBack() }
             ]);
@@ -61,15 +63,25 @@ export default function SettingsScreen({ navigation }) {
                 </View>
             ) : null}
 
-            <TextInput
-                style={styles.input}
-                placeholder="Paste your API key here..."
-                value={apiKey}
-                onChangeText={setApiKey}
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry={false}
-            />
+            <View style={styles.inputContainer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Paste your API key here..."
+                    value={apiKey}
+                    onChangeText={setApiKey}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry={secureTextEntry}
+                />
+                <TouchableOpacity
+                    style={styles.eyeButton}
+                    onPress={() => setSecureTextEntry(!secureTextEntry)}
+                >
+                    <Text style={styles.eyeButtonText}>
+                        {secureTextEntry ? '👁️' : '👁️‍🗨️'}
+                    </Text>
+                </TouchableOpacity>
+            </View>
 
             <TouchableOpacity style={styles.saveButton} onPress={saveKey}>
                 <Text style={styles.saveButtonText}>Save API Key</Text>
@@ -114,13 +126,27 @@ const styles = StyleSheet.create({
         fontFamily: 'monospace',
         color: '#333',
     },
-    input: {
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 10,
+        marginBottom: 20,
+        paddingRight: 8,
+    },
+    input: {
+        flex: 1,
         padding: 14,
         fontSize: 16,
-        marginBottom: 20,
+    },
+    eyeButton: {
+        padding: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    eyeButtonText: {
+        fontSize: 20,
     },
     saveButton: {
         backgroundColor: '#007AFF',

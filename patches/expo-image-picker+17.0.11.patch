@@ -1,0 +1,55 @@
+diff --git a/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ExpoCropImageActivity.kt b/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ExpoCropImageActivity.kt
+index 59ca718..1327b4b 100644
+--- a/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ExpoCropImageActivity.kt
++++ b/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/ExpoCropImageActivity.kt
+@@ -19,6 +19,30 @@ class ExpoCropImageActivity : CropImageActivity() {
+   // region Lifecycle Methods
+   override fun onCreate(savedInstanceState: android.os.Bundle?) {
+     super.onCreate(savedInstanceState)
++    
++    // Set padding on the CropImageView to force borders around the image area,
++    // preventing it from occupying the entire screen and drawing behind the buttons.
++    runCatching {
++      var cropImageViewId = resources.getIdentifier("cropImageView", "id", packageName)
++      if (cropImageViewId == 0) {
++        cropImageViewId = resources.getIdentifier("cropImageView", "id", "com.canhub.cropper")
++      }
++      if (cropImageViewId != 0) {
++        val cropImageView = findViewById<android.view.View>(cropImageViewId)
++        val paddingPx = android.util.TypedValue.applyDimension(
++          android.util.TypedValue.COMPLEX_UNIT_DIP,
++          40f,
++          resources.displayMetrics
++        ).toInt()
++        val bottomPaddingPx = android.util.TypedValue.applyDimension(
++          android.util.TypedValue.COMPLEX_UNIT_DIP,
++          80f,
++          resources.displayMetrics
++        ).toInt()
++        cropImageView?.setPadding(paddingPx, paddingPx, paddingPx, bottomPaddingPx)
++      }
++    }
++
+     // Fetch the private cropImageOptions and apply the palette as early as possible so
+     // the toolbar and menu icons are tinted correctly on first render.
+     getCropOptions()?.let { opts ->
+diff --git a/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/contracts/CropImageContract.kt b/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/contracts/CropImageContract.kt
+index adc53e4..8c130cc 100644
+--- a/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/contracts/CropImageContract.kt
++++ b/node_modules/expo-image-picker/android/src/main/java/expo/modules/imagepicker/contracts/CropImageContract.kt
+@@ -42,11 +42,14 @@ internal class CropImageContract(
+ 
+           this.customOutputUri = outputUri
+ 
++          // Pad the crop area to 20% margin from the screen edges by default
++          initialCropWindowPaddingRatio = 0.2f
++
+           input.options.aspect?.let { (x, y) ->
+             aspectRatioX = x
+             aspectRatioY = y
+             fixAspectRatio = true
+-            initialCropWindowPaddingRatio = 0f
++            initialCropWindowPaddingRatio = 0.2f
+           }
+ 
+           cropShape = when (input.options.shape) {
