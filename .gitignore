@@ -14,3 +14,4 @@ veda
 .idea/
 .vscode/
 .env
+*.apk

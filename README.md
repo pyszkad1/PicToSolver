@@ -36,8 +36,9 @@ If you are developing or running the app locally using Expo Go:
 Because Expo Go development links expire as soon as you turn your computer off, the best way to share the app is via a standalone `.apk` build!
 
 You can view the build details and download the compiled Android app directly here:
-> **🔗 [Expo Build Dashboard](https://expo.dev/accounts/apyszko/projects/PicToSolver/builds/e59ad1d4-8dc4-4bcd-b8b0-47468cf195a3)** 
-> **📲 [Direct APK Download](https://expo.dev/artifacts/eas/e59ad1d4-8dc4-4bcd-b8b0-47468cf195a3.apk)** 
+> **🔗 [GitHub Release v1.0.2](https://github.com/pyszkad1/PicToSolver/releases/tag/v1.0.2)**
+> **🔗 [Expo Build Dashboard](https://expo.dev/accounts/apyszko/projects/PicToSolver/builds/9fddcc91-6d1c-46da-bc97-745bd45e3565)** 
+> **📲 [Direct APK Download](https://expo.dev/artifacts/eas/9fddcc91-6d1c-46da-bc97-745bd45e3565.apk)** 
 
 Alternatively, scan this permanent QR code with your Android phone to install the app:
 
