@@ -12,36 +12,47 @@ The output from Gemini must be strictly the raw PBN string, formatted exactly li
 with no markdown formatting, no code blocks, and zero conversational filler.
 `.trim();
 
+const CANDIDATE_MODELS = [
+    "gemini-3.5-flash-lite",
+    "gemini-3.5-flash"
+];
+
 export const extractPBNFromImage = async (base64Image, apiKey) => {
     if (!apiKey) {
         throw new Error("No Gemini API key provided. Please set your API key in Settings.");
     }
 
-    try {
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const imagePart = {
+        inlineData: {
+            data: base64Image,
+            mimeType: "image/jpeg"
+        },
+    };
 
-        const imagePart = {
-            inlineData: {
-                data: base64Image,
-                mimeType: "image/jpeg"
-            },
-        };
+    let lastError = null;
 
-        const result = await model.generateContent([SYSTEM_PROMPT, imagePart]);
-        const response = await result.response;
-        const text = response.text().trim();
+    for (const modelName of CANDIDATE_MODELS) {
+        try {
+            const model = genAI.getGenerativeModel({ model: modelName });
+            const result = await model.generateContent([SYSTEM_PROMPT, imagePart]);
+            const response = await result.response;
+            const text = response.text().trim();
 
-        // Validate that it looks like PBN and strictly enforce T instead of 10
-        let pbnText = text;
-        if (pbnText.startsWith("[") && pbnText.endsWith("]")) {
-            pbnText = pbnText.replace(/10/g, 'T');
-            return pbnText;
-        } else {
-            throw new Error("Invalid format received from Gemini: " + text);
+            // Validate that it looks like PBN and strictly enforce T instead of 10
+            let pbnText = text;
+            if (pbnText.startsWith("[") && pbnText.endsWith("]")) {
+                pbnText = pbnText.replace(/10/g, 'T');
+                return pbnText;
+            } else {
+                throw new Error("Invalid format received from Gemini: " + text);
+            }
+        } catch (error) {
+            console.warn(`Gemini model ${modelName} failed, attempting next model if available:`, error?.message || error);
+            lastError = error;
         }
-    } catch (error) {
-        console.error("Gemini API Error:", error);
-        throw error;
     }
+
+    console.error("Gemini API Error across all candidate models:", lastError);
+    throw lastError;
 };

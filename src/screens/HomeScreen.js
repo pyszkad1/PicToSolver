@@ -64,9 +64,12 @@ export default function HomeScreen({ navigation, route }) {
                 // If there is no key stored, send the user to Settings immediately
                 if (!stored) {
                     Alert.alert(
-                        'Welcome!',
-                        'To get started, please enter your Google Gemini API key. You can get one for free at aistudio.google.com.',
-                        [{ text: 'Set Up', onPress: () => navigation.navigate('Settings') }]
+                        'Welcome to PicToSolver!',
+                        'To scan and solve bridge hands, you need a free Google Gemini API key. Setup takes less than a minute via Google AI Studio!',
+                        [
+                            { text: 'Set Up API Key', onPress: () => navigation.navigate('Settings') },
+                            { text: 'Later', style: 'cancel' }
+                        ]
                     );
                 }
             };
